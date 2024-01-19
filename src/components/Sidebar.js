@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import AlbumCard from "./AlbumCard";
 
-const Sidebar = () => {
+const Sidebar = ({ onSearch }) => {
 	const [searchResults, setSearchResults] = useState([]);
 
 	const handleSearch = async (event) => {
@@ -26,6 +26,7 @@ const Sidebar = () => {
 					let result = await response.json();
 					let { data } = result;
 					setSearchResults(data);
+					onSearch(data); // passo risultati search a un altro component
 				} else {
 					throw new Error("Error in search");
 				}
@@ -104,12 +105,6 @@ const Sidebar = () => {
 						</ul>
 					</div>
 				</div>
-			</div>
-
-			<div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
-				{searchResults.map((song) => (
-					<AlbumCard key={song.id} songInfo={song} />
-				))}
 			</div>
 		</nav>
 	);

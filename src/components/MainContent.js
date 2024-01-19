@@ -1,9 +1,10 @@
 // MainContent.js
-import React from "react";
+import React, { useState } from "react";
 import MusicSection from "./MusicSection";
+import AlbumCard from "./AlbumCard";
 import "../App.css";
 
-const MainContent = () => {
+const MainContent = ({ searchResults }) => {
 	return (
 		<div className="col-12 col-md-9 offset-md-3 mainPage">
 			<div className="row">
@@ -17,9 +18,16 @@ const MainContent = () => {
 			</div>
 			<div className="row">
 				<div className="col-10">
-					<div id="searchResults" style={{ display: "none" }}>
+					<div
+						id="searchResults"
+						style={{ display: searchResults.length > 0 ? "block" : "none" }}
+					>
 						<h2>Search Results</h2>
-						<div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"></div>
+						<div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
+							{searchResults.map((song) => (
+								<AlbumCard key={song.id} songInfo={song} />
+							))}
+						</div>
 					</div>
 				</div>
 			</div>
