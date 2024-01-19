@@ -1,5 +1,6 @@
 import React from "react";
 import "../App.css";
+import { Button } from "react-bootstrap";
 
 const AlbumCard = ({ songInfo }) => {
 	return (
@@ -133,10 +134,10 @@ const Sidebar = () => {
 				</div>
 			</div>
 			<div className="nav-btn">
-				<button className="btn signup-btn" type="button">
+				<button className="signup-btn" type="button">
 					Sign Up
 				</button>
-				<button className="btn login-btn" type="button">
+				<button className="login-btn" type="button">
 					Login
 				</button>
 				<a href="#">Cookie Policy</a> |<a href="#"> Privacy</a>
