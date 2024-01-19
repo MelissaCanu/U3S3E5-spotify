@@ -1,13 +1,18 @@
-export const selectSong = (song) => {
-	return {
-		type: "SONG_SELECTED",
-		payload: song,
-	};
-};
+export const SET_SONGS = "SET_SONGS";
+export const SELECT_SONG = "SELECT_SONG";
+export const LIKE_SONG = "LIKE_SONG";
 
-export const likeSong = (songId) => {
-	return {
-		type: "LIKE_SONG",
-		payload: songId,
-	};
-};
+export const setSongs = (songs) => ({
+	type: SET_SONGS,
+	payload: songs,
+});
+
+export const selectSong = (song) => ({
+	type: SELECT_SONG,
+	payload: song,
+});
+
+export const likeSong = (songId) => ({
+	type: LIKE_SONG,
+	payload: songId,
+});
