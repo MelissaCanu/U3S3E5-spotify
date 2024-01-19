@@ -1,25 +1,21 @@
-import logo from './logo.svg';
-import './App.css';
+// App.js
+import React from "react";
+import Sidebar from "./components/Sidebar";
+import MainContent from "./components/MainContent";
+import PlayerControls from "./components/PlayerControls";
+import MusicSection from "./components/MusicSection";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = () => {
+	return (
+		<div>
+			<Sidebar />
+			<MainContent />
+			<PlayerControls />
+			<MusicSection artistName="queen" querySelector="#rockSection" />
+			<MusicSection artistName="katyperry" querySelector="#popSection" />
+			<MusicSection artistName="eminem" querySelector="#hipHopSection" />
+		</div>
+	);
+};
 
 export default App;
