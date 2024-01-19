@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import AlbumCard from "./AlbumCard";
+import "../App.css";
 
 const Sidebar = ({ onSearch }) => {
 	const [searchResults, setSearchResults] = useState([]);
@@ -105,6 +105,15 @@ const Sidebar = ({ onSearch }) => {
 						</ul>
 					</div>
 				</div>
+			</div>
+			<div class="nav-btn">
+				<button class="btn signup-btn" type="button">
+					Sign Up
+				</button>
+				<button class="btn login-btn" type="button">
+					Login
+				</button>
+				<a href="#">Cookie Policy</a> |<a href="#"> Privacy</a>
 			</div>
 		</nav>
 	);
