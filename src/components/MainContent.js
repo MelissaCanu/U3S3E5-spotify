@@ -1,7 +1,7 @@
 // MainContent.js
 import React from "react";
 import "../App.css";
-
+import MusicSection from "./MusicSection";
 const MainContent = () => {
 	return (
 		<div className="col-12 col-md-9 offset-md-3 mainPage">
