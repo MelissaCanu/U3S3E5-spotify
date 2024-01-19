@@ -5,7 +5,10 @@ import { SET_SONGS, SELECT_SONG, LIKE_SONG } from "../actions/actions";
 const songsReducer = (state = [], action) => {
 	switch (action.type) {
 		case SET_SONGS:
-			return action.payload;
+			return {
+				...state,
+				[action.payload.artistName]: action.payload.songs,
+			};
 		default:
 			return state;
 	}

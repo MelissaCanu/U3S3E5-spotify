@@ -1,4 +1,3 @@
-// MusicSection.js
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setSongs, selectSong, likeSong } from "../redux/actions/actions";
@@ -6,7 +5,7 @@ import AlbumCard from "./AlbumCard";
 
 const MusicSection = ({ artistName, querySelector }) => {
 	const dispatch = useDispatch();
-	const songs = useSelector((state) => state.songs);
+	const songs = useSelector((state) => state.songs[artistName] || []);
 
 	useEffect(() => {
 		const fetchData = async () => {
@@ -26,7 +25,7 @@ const MusicSection = ({ artistName, querySelector }) => {
 
 				if (response.ok) {
 					let { data } = await response.json();
-					dispatch(setSongs(data.slice(0, 4))); // Assuming setSongs is a redux action
+					dispatch(setSongs(artistName, data.slice(0, 4)));
 				} else {
 					throw new Error("Error in fetching songs");
 				}
@@ -36,7 +35,7 @@ const MusicSection = ({ artistName, querySelector }) => {
 		};
 
 		fetchData();
-	}, [artistName, dispatch]); // dispatch qui
+	}, [artistName, dispatch]);
 
 	const handleSelectSong = (song) => {
 		dispatch(selectSong(song));
