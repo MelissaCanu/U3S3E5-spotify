@@ -1,41 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import "../App.css";
-import { Button } from "react-bootstrap";
-
-const AlbumCard = ({ songInfo }) => {
-	return (
-		<div className="col text-center" id={songInfo.id}>
-			<img
-				className="img-fluid"
-				src={songInfo.album.cover_medium}
-				alt="track"
-			/>
-			<p>
-				Track:{" "}
-				{songInfo.title.length < 16
-					? `${songInfo.title}`
-					: `${songInfo.title.substring(0, 16)}...`}
-				<br />
-				Artist: {songInfo.artist.name}
-			</p>
-		</div>
-	);
-};
+import AlbumCard from "./AlbumCard";
 
 const Sidebar = () => {
-	const albumCard = (songInfo) => (
-		<AlbumCard key={songInfo.id} songInfo={songInfo} />
-	);
+	const [searchResults, setSearchResults] = useState([]);
 
 	const handleSearch = async (event) => {
 		event.preventDefault();
-		let div = document.querySelector("#searchResults .row");
-		div.innerHTML = "";
 		let searchQuery = document.querySelector("#searchField").value;
 
 		if (searchQuery.length > 2) {
-			document.querySelector("#searchResults").style.display = "block";
-
 			try {
 				let response = await fetch(
 					`https://striveschool-api.herokuapp.com/api/deezer/search?q=${searchQuery}`,
@@ -48,101 +22,49 @@ const Sidebar = () => {
 						},
 					}
 				);
+
 				if (response.ok) {
 					let result = await response.json();
 					let { data } = result;
-					data.forEach((song) => {
-						div.innerHTML += albumCard(song);
-					});
+					setSearchResults(data); // Update state with search results
 				} else {
 					throw new Error("Error in search");
 				}
 			} catch (err) {
 				console.error("Error", err);
 			}
-		} else {
-			document.querySelector("#searchResults").style.display = "none";
 		}
 	};
 
 	return (
-		<nav
-			className="navbar navbar-expand-md fixed-left justify-content-between"
-			id="sidebar"
-		>
-			<div className="container flex-column align-items-start">
-				<a className="navbar-brand" href="index.html">
-					<img
-						src="assets/logo/logo.png"
-						alt="Spotify Logo"
-						width="131"
-						height="40"
-					/>
-				</a>
-				<button
-					className="navbar-toggler"
-					type="button"
-					data-toggle="collapse"
-					data-target="#navbarNavAltMarkup"
-					aria-controls="navbarNavAltMarkup"
-					aria-expanded="false"
-					aria-label="Toggle navigation"
-				>
-					<span className="navbar-toggler-icon"></span>
-				</button>
-				<div className="collapse navbar-collapse" id="navbarNavAltMarkup">
-					<div className="navbar-nav">
-						<ul>
-							<li>
-								<a
-									className="nav-item nav-link d-flex align-items-center"
-									href="#"
-								>
-									<i className="bi bi-house-door-fill"></i>&nbsp; Home
-								</a>
-							</li>
-							<li>
-								<a
-									className="nav-item nav-link d-flex align-items-center"
-									href="#"
-								>
-									<i className="bi bi-book-fill"></i>&nbsp; Your Library
-								</a>
-							</li>
-							<li>
-								<form className="input-group mt-3" onSubmit={handleSearch}>
-									<input
-										type="text"
-										className="form-control"
-										id="searchField"
-										placeholder="Search"
-										aria-label="Search"
-										aria-describedby="basic-addon2"
-									/>
-									<div className="input-group-append">
-										<button
-											className="btn btn-outline-secondary btn-sm h-100"
-											type="submit"
-										>
-											GO
-										</button>
-									</div>
-								</form>
-							</li>
-						</ul>
-					</div>
+		<div>
+			{/* ... your existing JSX */}
+			<form className="input-group mt-3" onSubmit={handleSearch}>
+				<input
+					type="text"
+					className="form-control"
+					id="searchField"
+					placeholder="Search"
+					aria-label="Search"
+					aria-describedby="basic-addon2"
+				/>
+				<div className="input-group-append">
+					<button
+						className="btn btn-outline-secondary btn-sm h-100"
+						type="submit"
+					>
+						GO
+					</button>
 				</div>
+			</form>
+
+			{/* Render search results */}
+			<div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
+				{searchResults.map((song) => (
+					<AlbumCard key={song.id} songInfo={song} />
+				))}
 			</div>
-			<div className="nav-btn">
-				<button className="signup-btn" type="button">
-					Sign Up
-				</button>
-				<button className="login-btn" type="button">
-					Login
-				</button>
-				<a href="#">Cookie Policy</a> |<a href="#"> Privacy</a>
-			</div>
-		</nav>
+		</div>
 	);
 };
 
