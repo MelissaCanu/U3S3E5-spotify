@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setSongs, selectSong, likeSong } from "../redux/actions/actions";
 import AlbumCard from "./AlbumCard";
 
-const MusicSection = ({ artistName, querySelector }) => {
+const MusicSection = ({ title, artistName, querySelector }) => {
 	const dispatch = useDispatch();
 	const songs = useSelector((state) => state.songs[artistName] || []);
 
@@ -47,14 +47,21 @@ const MusicSection = ({ artistName, querySelector }) => {
 
 	return (
 		<div className="row">
-			{songs.map((song) => (
-				<AlbumCard
-					key={song.id}
-					songInfo={song}
-					onSelect={() => handleSelectSong(song)}
-					onLike={() => handleLikeSong(song.id)}
-				/>
-			))}
+			<div className="col-10">
+				<div id={querySelector}>
+					<h2>{title}</h2>
+					<div className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3">
+						{songs.map((song) => (
+							<AlbumCard
+								key={song.id}
+								songInfo={song}
+								onSelect={() => handleSelectSong(song)}
+								onLike={() => handleLikeSong(song.id)}
+							/>
+						))}
+					</div>
+				</div>
+			</div>
 		</div>
 	);
 };

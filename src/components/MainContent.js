@@ -31,51 +31,21 @@ const MainContent = ({ searchResults }) => {
 					</div>
 				</div>
 			</div>
-			<div className="row">
-				<div className="col-10">
-					<div id="rock">
-						<h2>Rock Classics</h2>
-						<div
-							className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
-							id="rockSection"
-						>
-							<MusicSection artistName="queen" querySelector="#rockSection" />
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-10">
-					<div id="pop">
-						<h2>Pop Culture</h2>
-						<div
-							className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
-							id="popSection"
-						>
-							<MusicSection
-								artistName="katyperry"
-								querySelector="#popSection"
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div className="row">
-				<div className="col-10">
-					<div id="hiphop">
-						<h2>#HipHop</h2>
-						<div
-							className="row row-cols-1 row-cols-sm-2 row-cols-lg-3 row-cols-xl-4 imgLinks py-3"
-							id="hipHopSection"
-						>
-							<MusicSection
-								artistName="eminem"
-								querySelector="#hipHopSection"
-							/>
-						</div>
-					</div>
-				</div>
-			</div>
+			<MusicSection
+				title="Rock Classics"
+				artistName="queen"
+				querySelector="#rockSection"
+			/>
+			<MusicSection
+				title="Pop Culture"
+				artistName="katyperry"
+				querySelector="#popSection"
+			/>
+			<MusicSection
+				title="#HipHop"
+				artistName="eminem"
+				querySelector="#hipHopSection"
+			/>
 		</div>
 	);
 };

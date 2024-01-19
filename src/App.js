@@ -27,9 +27,6 @@ const App = () => {
 			{/* PLAYER CONTROLS */}
 			<PlayerControls />
 			{/* MUSIC SECTIONS */}
-			<MusicSection artistName="queen" querySelector="#rockSection" />
-			<MusicSection artistName="katyperry" querySelector="#popSection" />
-			<MusicSection artistName="eminem" querySelector="#hipHopSection" />
 		</Provider>
 	);
 };
